@@ -9,7 +9,10 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import own.watcharapon.service.AssetsService;
+import own.watcharapon.service.ExchangeRateService;
 import own.watcharapon.service.WatchlistService;
+import own.watcharapon.utils.ExchangeRateUtils;
 
 import java.util.concurrent.Executor;
 
@@ -20,9 +23,13 @@ public class AsyncConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(AsyncConfiguration.class);
     private final WatchlistService watchlistService;
+    private final AssetsService assetsService;
+    private final ExchangeRateService exchangeRateService;
 
-    public AsyncConfiguration(@Lazy WatchlistService watchlistService) {
+    public AsyncConfiguration(@Lazy WatchlistService watchlistService, @Lazy AssetsService assetsService, ExchangeRateService exchangeRateService) {
         this.watchlistService = watchlistService;
+        this.assetsService = assetsService;
+        this.exchangeRateService = exchangeRateService;
     }
 
     @Bean(name = "taskExecutor")
@@ -40,5 +47,10 @@ public class AsyncConfiguration {
     @PostConstruct
     void postConstruct() {
         watchlistService.updateJittaData();
+        assetsService.updateAllCostAndShare();
+        assetsService.updateHistoryPriceData();
+        assetsService.updateLatestPriceData();
+        assetsService.updateDividendData();
+        exchangeRateService.updateExchangeRate();
     }
 }

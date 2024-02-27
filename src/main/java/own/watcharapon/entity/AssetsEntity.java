@@ -32,6 +32,9 @@ public class AssetsEntity {
     @Column(name = "cost_value", precision = 8)
     private Double costValue;
 
+    @Column(name = "holding_value", precision = 8)
+    private Double holdingValue;
+
     @Column(name = "target", precision = 2)
     private Double target;
 
@@ -86,8 +89,11 @@ public class AssetsEntity {
     @Column(name = "dividend_yield", precision = 2)
     private Double dividendYield;
 
-    @Column(name = "dividend_yield_percentage", precision = 2)
-    private Double dividendYieldPercentage;
+    @Column(name = "dividend_amount", precision = 2)
+    private Double dividendAmount;
+
+    @Column(name = "payout_ratio", precision = 2)
+    private Double payoutRatio;
 
     @Column(name = "note")
     private String note;

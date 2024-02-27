@@ -27,10 +27,10 @@ public class TransactionCashEntity {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "ex_rate", nullable = false, precision = 8)
+    @Column(name = "ex_rate", nullable = false, precision = 2)
     private Double exRate;
 
-    @Column(name = "thb", nullable = false, precision = 8)
+    @Column(name = "thb", nullable = false, precision = 2)
     private Double thb;
 
     @Column(name = "usd", nullable = false, precision = 2)

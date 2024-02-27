@@ -27,7 +27,7 @@ public class TransactionSavingEntity {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "amount", nullable = false, precision = 8)
+    @Column(name = "amount", nullable = false, precision = 2)
     private Double amount;
 
     @Column(name = "application ", nullable = false)

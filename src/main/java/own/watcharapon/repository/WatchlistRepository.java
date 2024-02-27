@@ -14,5 +14,7 @@ public interface WatchlistRepository {
 
     List<SymbolPayload> getAllFilterLastUpdateJitta();
 
+    List<String> getAllSymbolNotInAssets();
+
     void updateJittaData(SymbolPayload symbolPayload, JittaPayload jittaPayload);
 }

@@ -30,6 +30,11 @@ public class WatchlistController {
         return ResponseEntity.ok().body(watchlistService.getAllWatchlist());
     }
 
+    @GetMapping("/get-symbol")
+    public ResponseEntity<List<String>> getAllSymbol() {
+        return ResponseEntity.ok().body(watchlistService.getAllSymbol());
+    }
+
     @GetMapping("/update-jitta")
     public ResponseEntity<String> updateJittaData() {
         watchlistService.updateJittaData();

@@ -34,7 +34,7 @@ public class TransactionStockEntity {
     @Column(name = "share", nullable = false, precision = 8)
     private Double share;
 
-    @Column(name = "price", nullable = false, precision = 8)
+    @Column(name = "price", nullable = false, precision = 2)
     private Double price;
 
     @Column(name = "fee", nullable = false, precision = 2)

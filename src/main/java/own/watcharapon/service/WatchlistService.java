@@ -2,7 +2,6 @@ package own.watcharapon.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Service;
 import own.watcharapon.payload.SymbolDataPayload;
 import own.watcharapon.payload.SymbolPayload;
@@ -25,18 +24,23 @@ public class WatchlistService {
     }
 
     public boolean checkSymbolAndSave(String symbol) {
-        SymbolDataPayload symbolDataPayload = checkSymbol(symbol);
+        SymbolDataPayload symbolDataPayload = checkSymbol(symbol.toUpperCase());
         if (symbolDataPayload == null)
             return true;
         else {
-            symbolDataPayload.setSymbol(symbol);
+            symbolDataPayload.setSymbol(symbol.toUpperCase());
             watchlistRepository.saveSymbol(symbolDataPayload);
+            updateJittaData();
             return false;
         }
     }
 
     public List<SymbolPayload> getAllWatchlist() {
         return watchlistRepository.getAll();
+    }
+
+    public List<String> getAllSymbol() {
+        return watchlistRepository.getAllSymbolNotInAssets();
     }
 
     public void updateJittaData() {

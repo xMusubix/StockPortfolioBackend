@@ -34,7 +34,7 @@ public class TransactionEClassEntity {
     @Column(name = "unit", nullable = false, precision = 8)
     private Double unit;
 
-    @Column(name = "amount", nullable = false, precision = 8)
+    @Column(name = "amount", nullable = false, precision = 2)
     private Double amount;
 
     @Column(name = "note")

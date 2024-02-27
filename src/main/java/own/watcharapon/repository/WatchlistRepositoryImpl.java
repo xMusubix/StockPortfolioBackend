@@ -108,7 +108,7 @@ public class WatchlistRepositoryImpl implements WatchlistRepository {
 
     private void insertWatchlist(String watchlistId, SymbolDataPayload symbolDataPayload, IndustryEntity industryEntity) {
         String insertQuery = """
-                INSERT INTO watchlist_table (market_symbol,market,symbolPayload,industry)
+                INSERT INTO watchlist_table (market_symbol,market,symbol,industry)
                 VALUES (?1,?2,?3,?4)
                 ON CONFLICT DO NOTHING
                 """;
@@ -147,11 +147,27 @@ public class WatchlistRepositoryImpl implements WatchlistRepository {
         String queryString = """
                 SELECT we.id,we.market,we.symbol
                 FROM WatchlistEntity we
-                WHERE lastUpdateJitta <= ?1
+                WHERE lastUpdateJitta <= ?1 OR lastUpdateJitta IS NULL
                 ORDER BY we.symbol ASC
                 """;
         return entityManager.createQuery(queryString, SymbolPayload.class)
                 .setParameter(1, LocalDateTime.now().minusDays(7))
+                .getResultList();
+    }
+
+    @Override
+    public List<String> getAllSymbolNotInAssets() {
+        String queryString = """
+                SELECT we.symbol
+                FROM WatchlistEntity we
+                WHERE we.marketSymbol NOT IN (
+                    SELECT ae.marketSymbol.marketSymbol
+                    FROM AssetsEntity ae
+                    WHERE ae.marketSymbol IS NOT NULL
+                )
+                ORDER BY we.symbol ASC
+                """;
+        return entityManager.createQuery(queryString, String.class)
                 .getResultList();
     }
 
