@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   db:
-    image: postgres
+    image: postgres:16.2
     container_name: local_pgdb
     restart: always
     ports:
@@ -9,5 +9,53 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+    command: postgres -c 'max_connections=1000'
     volumes:
-      - ./Database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./Backend/StockPortfolio/Database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - investment_portfolio
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  api-service:
+    container_name: api_service
+    build:
+      context: ./Backend/StockPortfolio
+      dockerfile: ./Dockerfile
+    image: api_service:1.0.0
+    environment:
+      TZ: 'Asia/Bangkok'
+      FRONTEND_URL: http://localhost:3000
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db/stock_portfolio
+    networks:
+      - investment_portfolio
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    container_name: frontend-service
+    image: frontend-service:1.0.0
+    build:
+      context: ./Frontend/stock_portfolio
+      dockerfile: ./Dockerfile
+      args:
+        - NEXT_PUBLIC_API_ENDPOINT=http://localhost:8080
+    environment:
+      NEXT_PUBLIC_API_ENDPOINT: http://localhost:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    networks:
+      - investment_portfolio
+
+networks:
+  investment_portfolio:
+    driver: bridge
