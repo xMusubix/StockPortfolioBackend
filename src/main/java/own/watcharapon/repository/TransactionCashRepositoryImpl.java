@@ -6,8 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import own.watcharapon.entity.TransactionCashEntity;
-import own.watcharapon.payload.DashboardPayload;
-import own.watcharapon.payload.TransactionCashExchangeRatePayload;
+import own.watcharapon.payload.AssetsDashboardPayload;
 
 import java.util.List;
 import java.util.UUID;
@@ -76,7 +75,7 @@ public class TransactionCashRepositoryImpl implements TransactionCashRepository 
     }
 
     @Override
-    public DashboardPayload.THB getAverageExRateAndTotalCost() {
+    public AssetsDashboardPayload.THB getAverageExRateAndTotalCost() {
         String queryString = """
                 SELECT
                     SUM(trc.thb) as totalCostTHB,
@@ -84,7 +83,7 @@ public class TransactionCashRepositoryImpl implements TransactionCashRepository 
                 FROM TransactionCashEntity trc
                 WHERE trc.type = 'ExchangeToUSD'
                 """;
-        return entityManager.createQuery(queryString, DashboardPayload.THB.class)
+        return entityManager.createQuery(queryString, AssetsDashboardPayload.THB.class)
                 .getSingleResult();
     }
 }

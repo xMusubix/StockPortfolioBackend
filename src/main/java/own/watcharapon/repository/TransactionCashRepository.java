@@ -1,8 +1,7 @@
 package own.watcharapon.repository;
 
 import own.watcharapon.entity.TransactionCashEntity;
-import own.watcharapon.payload.DashboardPayload;
-import own.watcharapon.payload.TransactionCashExchangeRatePayload;
+import own.watcharapon.payload.AssetsDashboardPayload;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,5 +16,5 @@ public interface TransactionCashRepository {
 
     Double getTotalCost();
 
-    DashboardPayload.THB getAverageExRateAndTotalCost();
+    AssetsDashboardPayload.THB getAverageExRateAndTotalCost();
 }

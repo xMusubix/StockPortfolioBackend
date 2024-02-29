@@ -4,7 +4,7 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 
 FROM openjdk:21-jdk-slim
-COPY --from=build /home/app/target/stockportfolio-1.0-SNAPSHOT.jar /usr/local/lib/stockportfolio.jar
+COPY --from=build /home/app/target/StockPortfolio-1.0-SNAPSHOT.jar /usr/local/lib/stockportfolio.jar
 
 RUN groupadd -r stockportfoliouser && useradd -r -g stockportfoliouser stockportfoliouser
 RUN chown -R stockportfoliouser:stockportfoliouser /usr

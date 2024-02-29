@@ -1,6 +1,5 @@
 package own.watcharapon.repository;
 
-import own.watcharapon.entity.AssetsEntity;
 import own.watcharapon.payload.*;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public interface AssetsRepository {
 
     SummaryAssetsData getSummaryAssetsData();
 
-    DashboardPayload.USD getTotalHoldingAndCost();
+    AssetsDashboardPayload.USD getTotalHoldingAndCost();
 
     Double getAvgDividendYield();
 

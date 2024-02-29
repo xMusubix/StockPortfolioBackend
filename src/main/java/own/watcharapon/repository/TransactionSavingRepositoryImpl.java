@@ -5,9 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import own.watcharapon.entity.TransactionCashEntity;
 import own.watcharapon.entity.TransactionSavingEntity;
-import own.watcharapon.payload.DashboardPayload;
 import own.watcharapon.payload.SavingSummaryPayload;
 
 import java.util.List;

@@ -3,11 +3,9 @@ package own.watcharapon.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import own.watcharapon.payload.AssetsPayload;
-import own.watcharapon.payload.DashboardPayload;
+import own.watcharapon.payload.AssetsDashboardPayload;
 import own.watcharapon.payload.SummaryAssetsData;
-import own.watcharapon.payload.SymbolPayload;
 import own.watcharapon.service.AssetsService;
-import own.watcharapon.service.WatchlistService;
 
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +44,7 @@ public class AssetsController {
     }
 
     @GetMapping("/dashboard")
-    public ResponseEntity<DashboardPayload> getDashboardDetail() {
+    public ResponseEntity<AssetsDashboardPayload> getDashboardDetail() {
         return ResponseEntity.ok().body(assetsService.getDashboardDetail());
     }
 }

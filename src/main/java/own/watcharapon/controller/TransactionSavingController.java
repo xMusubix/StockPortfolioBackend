@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/trsaving")
+@RequestMapping("/api/v1/trsavings")
 @CrossOrigin(origins = "${frontend.url}")
 public class TransactionSavingController {
     private final TransactionSavingService transactionSavingService;

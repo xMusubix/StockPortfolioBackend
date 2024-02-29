@@ -1,8 +1,6 @@
 package own.watcharapon.repository;
 
-import own.watcharapon.entity.TransactionCashEntity;
 import own.watcharapon.entity.TransactionSavingEntity;
-import own.watcharapon.payload.DashboardPayload;
 import own.watcharapon.payload.SavingSummaryPayload;
 
 import java.util.List;

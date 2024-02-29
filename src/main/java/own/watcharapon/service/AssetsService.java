@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class AssetsService {
@@ -166,29 +165,29 @@ public class AssetsService {
         marketSymbolList.forEach(this::updateCostAndShare);
     }
 
-    public DashboardPayload getDashboardDetail() {
-        DashboardPayload.USD usdData = assetsRepository.getTotalHoldingAndCost();
-        DashboardPayload.THB thbData = transactionCashRepository.getAverageExRateAndTotalCost();
-        DashboardPayload dashboardPayload = new DashboardPayload();
+    public AssetsDashboardPayload getDashboardDetail() {
+        AssetsDashboardPayload.USD usdData = assetsRepository.getTotalHoldingAndCost();
+        AssetsDashboardPayload.THB thbData = transactionCashRepository.getAverageExRateAndTotalCost();
+        AssetsDashboardPayload assetsDashboardPayload = new AssetsDashboardPayload();
         Double exchangeRate = exchangeRateRepository.getLastExchangeRate() - 0.1;
         Double avgDividendYield = assetsRepository.getAvgDividendYield();
 
         List<AssetsTopPricePayload> topGainers = assetsRepository.getTopGainers();
         List<AssetsTopPricePayload> topLosers = assetsRepository.getTopLosers();
 
-        dashboardPayload.setTotalHoldingUSD(usdData.getTotalHoldingUSD());
-        dashboardPayload.setTotalCostUSD(usdData.getTotalCostUSD());
-        dashboardPayload.setTotalCostTHB(thbData.getTotalCostTHB());
-        dashboardPayload.setAvgExchangeRate(thbData.getAvgExchangeRate());
-        dashboardPayload.setExchangeRate(exchangeRate);
-        dashboardPayload.setTotalHoldingTHB(usdData.getTotalHoldingUSD() * exchangeRate);
-        dashboardPayload.setChangeUSD(dashboardPayload.getTotalHoldingUSD() - dashboardPayload.getTotalCostUSD());
-        dashboardPayload.setChangeTHB(dashboardPayload.getTotalHoldingTHB() - dashboardPayload.getTotalCostTHB());
-        dashboardPayload.setChangePercentageUSD(calculatePriceChangePercentage(dashboardPayload.getTotalHoldingUSD(), dashboardPayload.getTotalCostUSD()));
-        dashboardPayload.setChangePercentageTHB(calculatePriceChangePercentage(dashboardPayload.getTotalHoldingTHB(), dashboardPayload.getTotalCostTHB()));
-        dashboardPayload.setAvgDividendYield(avgDividendYield);
-        dashboardPayload.setTopGainers(topGainers);
-        dashboardPayload.setTopLosers(topLosers);
-        return dashboardPayload;
+        assetsDashboardPayload.setTotalHoldingUSD(usdData.getTotalHoldingUSD());
+        assetsDashboardPayload.setTotalCostUSD(usdData.getTotalCostUSD());
+        assetsDashboardPayload.setTotalCostTHB(thbData.getTotalCostTHB());
+        assetsDashboardPayload.setAvgExchangeRate(thbData.getAvgExchangeRate());
+        assetsDashboardPayload.setExchangeRate(exchangeRate);
+        assetsDashboardPayload.setTotalHoldingTHB(usdData.getTotalHoldingUSD() * exchangeRate);
+        assetsDashboardPayload.setChangeUSD(assetsDashboardPayload.getTotalHoldingUSD() - assetsDashboardPayload.getTotalCostUSD());
+        assetsDashboardPayload.setChangeTHB(assetsDashboardPayload.getTotalHoldingTHB() - assetsDashboardPayload.getTotalCostTHB());
+        assetsDashboardPayload.setChangePercentageUSD(calculatePriceChangePercentage(assetsDashboardPayload.getTotalHoldingUSD(), assetsDashboardPayload.getTotalCostUSD()));
+        assetsDashboardPayload.setChangePercentageTHB(calculatePriceChangePercentage(assetsDashboardPayload.getTotalHoldingTHB(), assetsDashboardPayload.getTotalCostTHB()));
+        assetsDashboardPayload.setAvgDividendYield(avgDividendYield);
+        assetsDashboardPayload.setTopGainers(topGainers);
+        assetsDashboardPayload.setTopLosers(topLosers);
+        return assetsDashboardPayload;
     }
 }

@@ -95,15 +95,15 @@ public class ProcessPriceUtils {
             StockBar yearHigh = getYearHigh(priceMap, yearDateTime, localDate);
             StockBar yearLow = getYearLow(priceMap, yearDateTime, localDate);
 
-            LOG.info("Last Time : {}\tPrice: {}", lastPrice.getTimestamp(), lastPrice.getClose());
-            LOG.info("1 Week Time : {}\tPrice: {}", wkPrice1.getTimestamp(), wkPrice1.getClose());
-            LOG.info("1 Month Time : {}\tPrice: {}", moPrice1.getTimestamp(), moPrice1.getClose());
-            LOG.info("3 Month Time : {}\tPrice: {}", moPrice3.getTimestamp(), moPrice3.getClose());
-            LOG.info("6 Month Time : {}\tPrice: {}", moPrice6.getTimestamp(), moPrice6.getClose());
-            LOG.info("Year Time : {}\tPrice: {}", yearPrice1.getTimestamp(), yearPrice1.getClose());
-            LOG.info("YTD Time : {}\tPrice: {}", ytdPrice.getTimestamp(), ytdPrice.getClose());
-            LOG.info("Year High Time : {}\tPrice: {}", yearHigh.getTimestamp(), yearHigh.getClose());
-            LOG.info("Year Low Time : {}\tPrice: {}", yearLow.getTimestamp(), yearLow.getClose());
+//            LOG.info("Last Time : {}\tPrice: {}", lastPrice.getTimestamp(), lastPrice.getClose());
+//            LOG.info("1 Week Time : {}\tPrice: {}", wkPrice1.getTimestamp(), wkPrice1.getClose());
+//            LOG.info("1 Month Time : {}\tPrice: {}", moPrice1.getTimestamp(), moPrice1.getClose());
+//            LOG.info("3 Month Time : {}\tPrice: {}", moPrice3.getTimestamp(), moPrice3.getClose());
+//            LOG.info("6 Month Time : {}\tPrice: {}", moPrice6.getTimestamp(), moPrice6.getClose());
+//            LOG.info("Year Time : {}\tPrice: {}", yearPrice1.getTimestamp(), yearPrice1.getClose());
+//            LOG.info("YTD Time : {}\tPrice: {}", ytdPrice.getTimestamp(), ytdPrice.getClose());
+//            LOG.info("Year High Time : {}\tPrice: {}", yearHigh.getTimestamp(), yearHigh.getClose());
+//            LOG.info("Year Low Time : {}\tPrice: {}", yearLow.getTimestamp(), yearLow.getClose());
 
             double lastPriceValue = lastPrice.getClose();
             double yearHighPriceValue = yearHigh.getClose();
@@ -124,6 +124,7 @@ public class ProcessPriceUtils {
             double percentageYear = calculatePercentage(yearLowPriceValue, yearHighPriceValue, lastPriceValue);
             assetsHistoryPricePayload.setPercentYear(percentageYear);
 
+            LOG.info("Update {} History Price", symbol);
             assetsRepository.updateHistoryPrice(assetsHistoryPricePayload);
         } catch (Exception exception) {
             exception.printStackTrace();

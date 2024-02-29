@@ -5,8 +5,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
-import own.watcharapon.entity.AssetsEntity;
 import own.watcharapon.payload.*;
 
 import java.sql.PreparedStatement;
@@ -256,14 +254,14 @@ public class AssetsRepositoryImpl implements AssetsRepository {
     }
 
     @Override
-    public DashboardPayload.USD getTotalHoldingAndCost() {
+    public AssetsDashboardPayload.USD getTotalHoldingAndCost() {
         String queryString = """
                 SELECT
                     SUM(ass.holdingValue) AS totalHoldingUSD,
                     SUM(ass.costValue) AS totalCostUSD
                 FROM AssetsEntity ass
                 """;
-        return entityManager.createQuery(queryString, DashboardPayload.USD.class)
+        return entityManager.createQuery(queryString, AssetsDashboardPayload.USD.class)
                 .getSingleResult();
     }
 

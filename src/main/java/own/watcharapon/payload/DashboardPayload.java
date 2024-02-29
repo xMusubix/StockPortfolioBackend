@@ -10,33 +10,29 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DashboardPayload {
-    private Double totalHoldingUSD;
-    private Double totalHoldingTHB;
-    private Double totalCostTHB;
-    private Double totalCostUSD;
-    private Double changeUSD;
-    private Double changeTHB;
-    private Double changePercentageUSD;
+    private Double totalBalance;
+    private Double totalStock;
+    private Double totalStockPercent;
     private Double changePercentageTHB;
-    private Double avgDividendYield;
-    private Double avgExchangeRate;
-    private Double exchangeRate;
-    private List<AssetsTopPricePayload> topGainers;
-    private List<AssetsTopPricePayload> topLosers;
+    private Double totalSavings;
+    private Double totalSavingsPercent;
+    private List<SavingSummaryPayload> savingSummaryPayloads;
+    private List<BarChartData> barChartDataList;
+    private LineChartData lineChartData;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class THB {
-        private Double totalCostTHB;
-        private Double avgExchangeRate;
+    public static class BarChartData {
+        private String year;
+        private List<Double> dividendAmount;
     }
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class USD {
-        private Double totalHoldingUSD;
-        private Double totalCostUSD;
+    public static class LineChartData {
+        private List<String> labels;
+        private List<Double> dividendAmount;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import own.watcharapon.entity.TransactionCashEntity;
 import own.watcharapon.entity.TransactionStockEntity;
+import own.watcharapon.payload.DividendDataPayload;
 import own.watcharapon.payload.TransactionStockPayload;
 import own.watcharapon.utils.StockTypeEnum;
 
@@ -73,6 +74,22 @@ public class TransactionStockRepositoryImpl implements TransactionStockRepositor
                 """, selectType);
         return entityManager.createQuery(queryString, TransactionStockEntity.class)
                 .setParameter(1, marketSymbol)
+                .getResultList();
+    }
+
+    @Override
+    public List<DividendDataPayload> getDividendData() {
+        String queryString = """
+                SELECT EXTRACT(YEAR FROM tse.date) AS year,
+                       EXTRACT(MONTH FROM tse.date) AS month,
+                       SUM(tse.price) AS totalPrice,
+                       SUM(tse.fee) AS totalFee
+                FROM TransactionStockEntity tse
+                WHERE tse.type = 'Dividend'
+                GROUP BY EXTRACT(YEAR FROM tse.date), EXTRACT(MONTH FROM tse.date)
+                ORDER BY year, month ASC
+                """;
+        return entityManager.createQuery(queryString, DividendDataPayload.class)
                 .getResultList();
     }
 }

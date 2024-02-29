@@ -1,6 +1,7 @@
 package own.watcharapon.repository;
 
 import own.watcharapon.entity.TransactionStockEntity;
+import own.watcharapon.payload.DividendDataPayload;
 import own.watcharapon.payload.TransactionStockPayload;
 import own.watcharapon.utils.StockTypeEnum;
 
@@ -14,4 +15,6 @@ public interface TransactionStockRepository {
     void delete(UUID id);
 
     List<TransactionStockEntity> getAllByMarketSymbolAndType(String marketSymbol, StockTypeEnum type);
+
+    List<DividendDataPayload> getDividendData();
 }
