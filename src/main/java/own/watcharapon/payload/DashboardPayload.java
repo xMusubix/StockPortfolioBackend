@@ -16,6 +16,8 @@ public class DashboardPayload {
     private Double changePercentageTHB;
     private Double totalSavings;
     private Double totalSavingsPercent;
+    private Double sumDividendUsd;
+    private Double sumDividendThb;
     private List<SavingSummaryPayload> savingSummaryPayloads;
     private List<BarChartData> barChartDataList;
     private LineChartData lineChartData;

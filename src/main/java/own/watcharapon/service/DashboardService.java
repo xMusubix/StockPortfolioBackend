@@ -53,6 +53,10 @@ public class DashboardService {
         double percentageTotalStock = (totalStock / totalBalance) * 100;
         double percentageTotalSavings = (totalSavings / totalBalance) * 100;
         double changePercentageTHB = calculatePriceChangePercentage(totalStock, thbData.getTotalCostTHB());
+        double sumDividendUsd = dividendDataPayloadList.stream()
+                .mapToDouble(item -> item.getTotalPrice() - item.getTotalFee())
+                .sum();
+        double sumDividendThb = sumDividendUsd * exchangeRate;
         List<DashboardPayload.BarChartData> barChartDataList = convertToBarChartData(dividendDataPayloadList);
         DashboardPayload.LineChartData lineChartData = convertToLineChartData(dividendDataPayloadList);
 
@@ -64,6 +68,8 @@ public class DashboardService {
         dashboardPayload.setTotalBalance(totalBalance);
         dashboardPayload.setChangePercentageTHB(changePercentageTHB);
         dashboardPayload.setSavingSummaryPayloads(savingSummaryPayloadList);
+        dashboardPayload.setSumDividendUsd(sumDividendUsd);
+        dashboardPayload.setSumDividendThb(sumDividendThb);
         dashboardPayload.setBarChartDataList(barChartDataList);
         dashboardPayload.setLineChartData(lineChartData);
 
