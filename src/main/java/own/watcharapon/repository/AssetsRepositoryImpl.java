@@ -320,12 +320,12 @@ public class AssetsRepositoryImpl implements AssetsRepository {
                      st.sectorName,
                      SUM(ass.target) AS totalTarget,
                      SUM((ass.holdingValue / ?1) * 100) AS totalActual
-                 FROM AssetsEntity ass
-                 INNER JOIN WatchlistEntity wl ON wl.marketSymbol = ass.marketSymbol.marketSymbol
-                 INNER JOIN IndustryEntity it ON it.industryName = wl.industry.industryName
-                 INNER JOIN SectorEntity st ON st.sectorName = it.sectorName.sectorName
-                 GROUP BY st.sectorName
-                 ORDER BY SUM(ass.target) DESC
+                FROM AssetsEntity ass
+                INNER JOIN WatchlistEntity wl ON wl.marketSymbol = ass.marketSymbol.marketSymbol
+                INNER JOIN IndustryEntity it ON it.industryName = wl.industry.industryName
+                INNER JOIN SectorEntity st ON st.sectorName = it.sectorName.sectorName
+                GROUP BY st.sectorName
+                ORDER BY totalTarget DESC,totalActual DESC
                 """;
         return entityManager.createQuery(queryString2, SumTargetBySector.class)
                 .setParameter(1, totalHoldingValue)
