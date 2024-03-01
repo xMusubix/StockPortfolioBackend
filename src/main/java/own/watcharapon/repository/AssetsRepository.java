@@ -38,4 +38,6 @@ public interface AssetsRepository {
     List<AssetsTopPricePayload> getTopGainers();
 
     List<AssetsTopPricePayload> getTopLosers();
+
+    List<SumTargetBySector> getSumTargetBySector();
 }

@@ -190,4 +190,8 @@ public class AssetsService {
         assetsDashboardPayload.setTopLosers(topLosers);
         return assetsDashboardPayload;
     }
+
+    public List<SumTargetBySector> getSumTargetBySector() {
+        return assetsRepository.getSumTargetBySector();
+    }
 }

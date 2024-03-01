@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import own.watcharapon.payload.AssetsPayload;
 import own.watcharapon.payload.AssetsDashboardPayload;
+import own.watcharapon.payload.SumTargetBySector;
 import own.watcharapon.payload.SummaryAssetsData;
 import own.watcharapon.service.AssetsService;
 
@@ -46,5 +47,10 @@ public class AssetsController {
     @GetMapping("/dashboard")
     public ResponseEntity<AssetsDashboardPayload> getDashboardDetail() {
         return ResponseEntity.ok().body(assetsService.getDashboardDetail());
+    }
+
+    @GetMapping("/sum-sector")
+    public ResponseEntity<List<SumTargetBySector>> getSumTargetBySector() {
+        return ResponseEntity.ok().body(assetsService.getSumTargetBySector());
     }
 }
