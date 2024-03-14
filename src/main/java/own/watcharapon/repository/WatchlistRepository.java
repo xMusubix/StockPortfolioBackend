@@ -5,6 +5,7 @@ import own.watcharapon.payload.SymbolDataPayload;
 import own.watcharapon.payload.SymbolPayload;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface WatchlistRepository {
 
@@ -17,4 +18,6 @@ public interface WatchlistRepository {
     List<String> getAllSymbolNotInAssets();
 
     void updateJittaData(SymbolPayload symbolPayload, JittaPayload jittaPayload);
+
+    int deleteWatchlist(UUID id);
 }

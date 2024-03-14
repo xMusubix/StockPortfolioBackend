@@ -6,6 +6,7 @@ import own.watcharapon.payload.SymbolPayload;
 import own.watcharapon.service.WatchlistService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/watchlist")
@@ -39,5 +40,13 @@ public class WatchlistController {
     public ResponseEntity<String> updateJittaData() {
         watchlistService.updateJittaData();
         return ResponseEntity.ok().body("Success");
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteWatchlist(@RequestParam("id") UUID id) {
+        if (watchlistService.deleteWatchlist(id))
+            return ResponseEntity.ok().body("Success");
+        else
+            return ResponseEntity.internalServerError().body("Unsuccessful");
     }
 }

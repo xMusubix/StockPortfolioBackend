@@ -44,6 +44,18 @@ public class AsyncConfiguration {
         return executor;
     }
 
+    @Bean(name = "jittaExecutor")
+    public Executor customExecutor() {
+        LOG.info("Creating Jitta Async Task Executor");
+        final ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(5); // Adjust as needed
+        executor.setMaxPoolSize(5); // Adjust as needed
+        executor.setQueueCapacity(500); // Adjust as needed
+        executor.setThreadNamePrefix("Jitta-Thread-");
+        executor.initialize();
+        return executor;
+    }
+
     @PostConstruct
     void postConstruct() {
         watchlistService.updateJittaData();

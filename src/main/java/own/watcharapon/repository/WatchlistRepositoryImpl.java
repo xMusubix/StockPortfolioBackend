@@ -16,6 +16,7 @@ import own.watcharapon.payload.SymbolPayload;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class WatchlistRepositoryImpl implements WatchlistRepository {
@@ -187,6 +188,18 @@ public class WatchlistRepositoryImpl implements WatchlistRepository {
                 .setParameter(2, jittaPayload.getLine())
                 .setParameter(3, jittaPayload.getScore())
                 .setParameter(4, jittaPayload.getState())
+                .executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public int deleteWatchlist(UUID id) {
+        String queryString = """
+                DELETE FROM WatchlistEntity we
+                WHERE we.id = ?1
+                """;
+        return entityManager.createQuery(queryString)
+                .setParameter(1, id)
                 .executeUpdate();
     }
 
