@@ -245,7 +245,8 @@ public class AssetsRepositoryImpl implements AssetsRepository {
                     COUNT(ass.marketSymbol.marketSymbol) as assetsCount,
                     SUM(ass.target) as target,
                     MIN(we.score) as minScore,
-                    MAX(we.score) as maxScore
+                    MAX(we.score) as maxScore,
+                    ( SELECT MAX(tse.date) FROM TransactionStockEntity tse ) as lastUpdateTransaction
                 FROM AssetsEntity ass
                 INNER JOIN WatchlistEntity we ON we.marketSymbol = ass.marketSymbol.marketSymbol
                 """;

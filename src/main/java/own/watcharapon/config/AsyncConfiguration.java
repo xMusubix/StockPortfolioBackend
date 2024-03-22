@@ -61,7 +61,7 @@ public class AsyncConfiguration {
         watchlistService.updateJittaData();
         assetsService.updateAllCostAndShare();
         assetsService.updateHistoryPriceData();
-        assetsService.updateLatestPriceData();
+        assetsService.updateLatestPriceData(true);
         assetsService.updateDividendData();
         exchangeRateService.updateExchangeRate();
     }

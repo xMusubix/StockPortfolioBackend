@@ -17,16 +17,16 @@ public class ProcessJob {
 
     @Scheduled(cron = "0 */2 20-23,0-4 * * TUE-FRI") // every 2 minute from 8 PM to 4 AM (GMT+7) on weekdays
     public void doTaskOnWeekdays() {
-        assetsService.updateLatestPriceData();
+        assetsService.updateLatestPriceData(false);
     }
 
     @Scheduled(cron = "0 */2 20-23 * * MON") // every 2 minute from 8 PM to 4 AM (GMT+7) on weekdays
     public void doTaskOnWeekdaysMon() {
-        assetsService.updateLatestPriceData();
+        assetsService.updateLatestPriceData(false);
     }
 
     @Scheduled(cron = "0 */2 0-4 * * SAT") // every 2 minute from 8 PM to 4 AM (GMT+7) on weekdays
     public void doTaskOnWeekdaysSat() {
-        assetsService.updateLatestPriceData();
+        assetsService.updateLatestPriceData(false);
     }
 }

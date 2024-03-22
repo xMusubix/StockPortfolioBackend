@@ -83,7 +83,7 @@ public class ProcessDividendUtils {
                     LOG.info("{} Payout Ratio : {}", symbol, payoutRatioString);
                     payoutRatioString = payoutRatioString.replace("%", "");
                     if (StringUtils.hasText(payoutRatioString) && !payoutRatioString.equals("N/A")) {
-                        assetsDividendDataPayload.setPayoutRatio(Double.parseDouble(dividendYieldString));
+                        assetsDividendDataPayload.setPayoutRatio(Double.parseDouble(payoutRatioString));
                     } else {
                         assetsDividendDataPayload.setPayoutRatio(null);
                     }

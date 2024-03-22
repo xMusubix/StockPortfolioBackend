@@ -41,7 +41,7 @@ public class AssetsService {
     public void saveSymbol(List<String> symbolList) {
         assetsRepository.saveAllAssets(symbolList);
         updateHistoryPriceData();
-        updateLatestPriceData();
+        updateLatestPriceData(true);
         updateDividendData();
     }
 
@@ -56,9 +56,9 @@ public class AssetsService {
         marketSymbolList.forEach(processPriceUtils::updateHistoryPrice);
     }
 
-    public void updateLatestPriceData() {
+    public void updateLatestPriceData(boolean isStartup) {
         LOG.info("Start Update Latest Price Data");
-        if (isWithinMarketHours()) {
+        if (isWithinMarketHours() || isStartup) {
             List<UpdateLatestPricePayload> updateLatestPricePayloadList = assetsRepository.getListToUpdateLatestPrice();
             if (!updateLatestPricePayloadList.isEmpty()) {
                 processPriceUtils.updateLatestPrice(updateLatestPricePayloadList);
